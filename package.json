@@ -1,0 +1,54 @@
+{
+  "name": "mocha-bamboo-report",
+  "version": "0.0.0-development",
+  "description": "Merge several Mocha Bamboo JSON reports",
+  "main": "lib/index.js",
+  "bin": {
+    "mocha-bamboo-report": "bin/mocha-bamboo-report.js"
+  },
+  "repository": "git@github.com:dtraft/mocha-bamboo-report.git",
+  "author": "Drew Trafton <dtraft@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "scripts": {
+    "test": "is-ci && jest --coverage && codecov || jest --coverage",
+    "lint": "eslint ./**/*.js",
+    "precommit": "jest --coverage && lint-staged",
+    "semantic-release": "semantic-release"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
+  "release": {
+    "branch": "master"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "minimatch": "^3.0.4",
+    "uuid": "^3.3.2",
+    "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "codecov": "^3.1.0",
+    "eslint": "^5.10.0",
+    "eslint-config-prettier": "^3.3.0",
+    "husky": "^1.2.1",
+    "is-ci": "^2.0.0",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "semantic-release": "^15.13.3"
+  }
+}

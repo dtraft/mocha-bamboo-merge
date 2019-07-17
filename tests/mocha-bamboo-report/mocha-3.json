@@ -1,0 +1,31 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 1,
+    "pending": 0,
+    "failures": 2,
+    "start": "2018-12-21T17:41:49.071Z",
+    "end": "2018-12-21T17:42:36.693Z"
+  },
+  "failures": [
+    {
+      "title": "Test 1",
+      "fullTitle": "Test 1",
+      "duration": 100
+    },
+    {
+      "title": "Test 3",
+      "fullTitle": "Test 3",
+      "duration": 100
+    }
+  ],
+  "passes": [
+    {
+      "title": "Test 2",
+      "fullTitle": "Test 2",
+      "duration": 100
+    }
+  ],
+  "skipped": []
+}
