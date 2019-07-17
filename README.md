@@ -1,29 +1,25 @@
-# mochawesome-merge
+# mocha-bamboo-merge
 
-[![CircleCI](https://circleci.com/gh/Antontelesh/mochawesome-merge.svg?style=svg)](https://circleci.com/gh/Antontelesh/mochawesome-merge)
-[![codecov](https://codecov.io/gh/Antontelesh/mochawesome-merge/branch/master/graph/badge.svg)](https://codecov.io/gh/Antontelesh/mochawesome-merge)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-
-Merge several [Mochawesome](https://github.com/adamgruber/mochawesome) JSON reports
+Merge several [mocha-bamboo](https://github.com/dtraft/mocha-bamboo-reporter) JSON reports. Based off the excellent [mochawesome-merge](https://github.com/Antontelesh/mochawesome-merge)
 
 ## Installation
 
 via `yarn`:
 
 ```
-$ yarn add mochawesome-merge --dev
+$ yarn add mocha-bamboo-merge --dev
 ```
 
 via `npm`:
 
 ```
-$ npm install mochawesome-merge --save-dev
+$ npm install mocha-bamboo-merge --save-dev
 ```
 
 ## Usage
 
 ```javascript
-const { merge } = require('mochawesome-merge')
+const { merge } = require('mocha-bamboo-merge')
 
 // See Options below
 const options = {
@@ -37,60 +33,32 @@ merge(options).then(report => {
 ## CLI
 
 ```
-$ mochawesome-merge --reportDir [directory] > output.json
+$ mocha-bamboo-merge --reportDir [directory] > output.json
 ```
 
 ## Options
 
-- `reportDir` (optional) — source mochawesome JSON reports directory. Defaults to `mochawesome-report`.
+- `reportDir` (optional) — source mocha-bamboo JSON reports directory. Defaults to `mocha-bamboo-report`.
 
 ## [Cypress](https://github.com/cypress-io/cypress)
 
-The main motivation to create this library was to be able to use [mochawesome](https://github.com/adamgruber/mochawesome) together with [Cypress](https://github.com/cypress-io/cypress).
+The main motivation to create this library was to be able to use [mocha-bamboo](https://github.com/adamgruber/mocha-bamboo) together with [Cypress](https://github.com/cypress-io/cypress).
 
-Since the version `3.0.0`, Cypress runs every spec separately, which leads to generating multiple mochawesome reports, one for each spec. `mochawesome-merge` can be used to merge these reports and then generate one HTML report for all your cypress tests.
+Since the version `3.0.0`, Cypress runs every spec separately, which leads to generating multiple mocha-bamboo reports, one for each spec. `mocha-bamboo-merge` can be used to merge these reports and then generate one HTML report for all your cypress tests.
 
 First, configure `cypress.json`:
 
 ```jsonc
 {
-  // use mochawesome reporter as usually
-  "reporter": "mochawesome",
+  // use mocha-bamboo-reporter
+  "reporter": "mocha-bamboo-reporter",
   "reporterOptions": {
-    // disable overwrite to generate many JSON reports
-    "overwrite": false,
-    // do not generate intermediate HTML reports
-    "html": false,
-    // generate intermediate JSON reports
-    "json": true
+    "output": "cypress/results/mocha-[hash].json"
   }
 }
 ```
 
-Then, write your custom script to run `cypress` together with `mochawesome-merge`:
-
-```javascript
-const cypress = require('cypress')
-const marge = require('mochawesome-report-generator')
-const { merge } = require('mochawesome-merge')
-
-cypress.run().then(
-  () => {
-    generateReport()
-  },
-  error => {
-    generateReport()
-    console.error(error)
-    process.exit(1)
-  }
-)
-
-function generateReport(options) {
-  return merge(options).then(report => marge.create(report, options))
-}
-```
-
-Alternatively, you can use CLI to merge JSON reports and generate HTML report.
+You can use CLI to merge JSON reports and generate HTML report.
 For example, an AWS CodeBuild `buildspec.yml` file might look something like this:
 
 ```yaml
@@ -103,6 +71,6 @@ phases:
       - yarn cypress run
   post_build:
     commands:
-      - yarn mochawesome-merge > mochawesome.json
-      - yarn marge mochawesome.json
+      - yarn mocha-bamboo-merge > mocha-bamboo.json
+      - yarn marge mocha-bamboo.json
 ```
