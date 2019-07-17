@@ -4,7 +4,7 @@
   "description": "Merge several Mocha Bamboo JSON reports",
   "main": "lib/index.js",
   "bin": {
-    "mocha-bamboo-report": "bin/mocha-bamboo-report.js"
+    "mocha-bamboo-merge": "bin/mocha-bamboo-merge.js"
   },
   "repository": "git@github.com:dtraft/mocha-bamboo-report.git",
   "author": "Drew Trafton <dtraft@gmail.com>",
